@@ -85,7 +85,16 @@ export class SearchComponent implements OnInit {
         this.isSearched = true;
         this.isSearching = true;
         this.router.navigate(['/search'], { queryParams: { searchText: this.searchText, page: 0 } });
-       
+        this.searches = {};
+        var pageNumber = this.route.snapshot.queryParams["page"];
+
+        var text = this.searchText;
+        this.http.get(this.config.apiUrl + '/search/' + text + '?page=' + pageNumber + "&pageSize=12"
+        ).subscribe(result => {
+            this.isSearching = false;
+            this.searches = result.json() as GetSearches;
+
+        }, error => console.error(error));
 
     }
    searchItAgain(text: string) {
@@ -94,11 +103,8 @@ export class SearchComponent implements OnInit {
             this.searchText = text;
             this.router.navigate(['/search'], { queryParams: { searchText: text, page: 0 } });
             this.searches = {};
-            this.isSearching = true;
             var pageNumber = this.route.snapshot.queryParams["page"];
-            if (pageNumber == null) {
-                this.isSearching = false;
-            }
+          
             var text = this.searchText;
             this.http.get(this.config.apiUrl + '/search/' + text + '?page=' + pageNumber + "&pageSize=12"
             ).subscribe(result => {

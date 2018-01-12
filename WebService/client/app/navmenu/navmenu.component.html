@@ -47,7 +47,12 @@
                         Customization
                     </a>
                 </li>
-                <li *ngIf="localStorageItem('currentUser') != null">  <a style="color:#ff3661" [routerLink]="['/login']">Logout</a></li>
+                <li *ngIf="localStorageItem('currentUser') != null"> 
+                  
+                    <a style="color:#ff3661" [routerLink]="['/login']">
+                       <span style="color:white">|</span> Sign Out
+                    </a>
+                </li>
               
                 <li *ngIf="localStorageItem('currentUser') == null" [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/login']" [queryParams]="{ page:0 }">

@@ -60,9 +60,17 @@ var SearchComponent = /** @class */ (function () {
         }, function (error) { return console.error(error); });
     };
     SearchComponent.prototype.startSearching = function () {
+        var _this = this;
         this.isSearched = true;
         this.isSearching = true;
         this.router.navigate(['/search'], { queryParams: { searchText: this.searchText, page: 0 } });
+        this.searches = {};
+        var pageNumber = this.route.snapshot.queryParams["page"];
+        var text = this.searchText;
+        this.http.get(this.config.apiUrl + '/search/' + text + '?page=' + pageNumber + "&pageSize=12").subscribe(function (result) {
+            _this.isSearching = false;
+            _this.searches = result.json();
+        }, function (error) { return console.error(error); });
     };
     SearchComponent.prototype.searchItAgain = function (text) {
         var _this = this;
@@ -71,11 +79,7 @@ var SearchComponent = /** @class */ (function () {
         this.searchText = text;
         this.router.navigate(['/search'], { queryParams: { searchText: text, page: 0 } });
         this.searches = {};
-        this.isSearching = true;
         var pageNumber = this.route.snapshot.queryParams["page"];
-        if (pageNumber == null) {
-            this.isSearching = false;
-        }
         var text = this.searchText;
         this.http.get(this.config.apiUrl + '/search/' + text + '?page=' + pageNumber + "&pageSize=12").subscribe(function (result) {
             _this.isSearching = false;
