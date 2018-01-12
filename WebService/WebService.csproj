@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="client\fonts\logofont.ttf" />
+    <Content Include="client\fonts\Moon Light.otf" />
+    <Content Include="client\img\calendar.png" />
+    <Content Include="client\img\location.png" />
+    <Content Include="client\img\pageflip.jpg" />
+    <Content Include="client\img\tags.png" />
+    <Content Include="client\img\Thumbs.db" />
+    <Content Include="client\img\triangle.png" />
+    <Content Include="client\img\user.png" />
+    <Content Include="client\Style.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataService\DataService.csproj" />
+  </ItemGroup>
+
+</Project>
