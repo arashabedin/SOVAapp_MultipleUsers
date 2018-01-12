@@ -858,7 +858,23 @@ svg {
     }
 }
 
-
+#sovauser_icon_field {
+    float: right;
+    margin-right: 20px;
+}
+#sovauser_icon {
+    font-size: 68px;
+    font-family: impact;
+    color: #191919;
+}
+#sovauser_name {
+    font-size: 18px;
+    position: relative;
+    bottom: 7px;
+    right: 15px;
+    font-family: "Press Start 2P";
+    color: #0057ff;
+}
 /* PreLoader Animation Ends*/
 
 

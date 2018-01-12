@@ -17,8 +17,8 @@
 
 
 <!-- Favourite Questions-->
-<div>
-    <span class="customefieldtitle">Welcome </span> <span>{{currentUser.firstName}}</span>
+<div id="sovauser_icon_field">
+    <span id="sovauser_icon" class="customefieldtitle">&#x263A; </span> <span id="sovauser_name">{{currentUser.username}}</span>
 </div>
 <h1 id="Home_title">Recommended Questions</h1>
 <div *ngIf="customization">
@@ -52,7 +52,7 @@
     </div>
 </div>
 
-<div class="col-md-6 col-md-offset-3">
+<!--<div class="col-md-6 col-md-offset-3">
     <h1>Hi {{currentUser.firstName}}!</h1>
     <p>You're logged in</p>
     <h3>All registered users:</h3>
@@ -63,7 +63,7 @@
         </li>
     </ul>
     <p><a [routerLink]="['/login']">Logout</a></p>
-</div>
+</div>-->
 
 <div class="spacer"></div>
 

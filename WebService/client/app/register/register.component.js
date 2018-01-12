@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var index_1 = require("../_services/index");
-var RegisterComponent = /** @class */ (function () {
+var RegisterComponent = (function () {
     function RegisterComponent(router, userService, alertService) {
         this.router = router;
         this.userService = userService;
@@ -32,16 +32,16 @@ var RegisterComponent = /** @class */ (function () {
             _this.loading = false;
         });
     };
-    RegisterComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            templateUrl: 'register.component.html'
-        }),
-        __metadata("design:paramtypes", [router_1.Router,
-            index_1.UserService,
-            index_1.AlertService])
-    ], RegisterComponent);
     return RegisterComponent;
 }());
+RegisterComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        templateUrl: 'register.component.html'
+    }),
+    __metadata("design:paramtypes", [router_1.Router,
+        index_1.UserService,
+        index_1.AlertService])
+], RegisterComponent);
 exports.RegisterComponent = RegisterComponent;
 //# sourceMappingURL=register.component.js.map

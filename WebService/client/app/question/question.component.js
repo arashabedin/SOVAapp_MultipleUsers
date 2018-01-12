@@ -13,7 +13,7 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var router_1 = require("@angular/router");
 var app_config_1 = require("../app.config");
-var QuestionComponent = /** @class */ (function () {
+var QuestionComponent = (function () {
     function QuestionComponent(http, config, route, router) {
         var _this = this;
         this.http = http;
@@ -69,15 +69,15 @@ var QuestionComponent = /** @class */ (function () {
             console.log(JSON.stringify(error.json()));
         });
     };
-    QuestionComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'question',
-            templateUrl: './question.component.html',
-        }),
-        __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig, router_1.ActivatedRoute, router_1.Router])
-    ], QuestionComponent);
     return QuestionComponent;
 }());
+QuestionComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'question',
+        templateUrl: './question.component.html',
+    }),
+    __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig, router_1.ActivatedRoute, router_1.Router])
+], QuestionComponent);
 exports.QuestionComponent = QuestionComponent;
 //# sourceMappingURL=question.component.js.map
