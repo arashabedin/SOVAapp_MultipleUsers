@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var AppConfig = (function () {
+var AppConfig = /** @class */ (function () {
     function AppConfig() {
         this.apiUrl = 'http://localhost:5000/api';
     }

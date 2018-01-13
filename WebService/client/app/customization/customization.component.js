@@ -13,7 +13,7 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var router_1 = require("@angular/router");
 var app_config_1 = require("../app.config");
-var CustomizationComponent = CustomizationComponent_1 = (function () {
+var CustomizationComponent = /** @class */ (function () {
     function CustomizationComponent(http, config, route, router) {
         var _this = this;
         this.http = http;
@@ -25,16 +25,18 @@ var CustomizationComponent = CustomizationComponent_1 = (function () {
         this.loading = true;
         // public sampleData: any;
         this.url = '/customization/';
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         router.events
             .subscribe(function (event) {
             if (event instanceof router_1.NavigationEnd) {
-                http.get(config.apiUrl + _this.url).subscribe(function (result) {
+                http.get(config.apiUrl + _this.url + _this.currentUser.id).subscribe(function (result) {
                     _this.customization = result.json();
                     _this.loading = false;
                 }, function (error) { return console.error(error); });
             }
         });
     }
+    CustomizationComponent_1 = CustomizationComponent;
     CustomizationComponent.prototype.ngOnInit = function () {
     };
     CustomizationComponent.prototype.currentpostLimitToedit = function (currentPostLimit) {
@@ -53,6 +55,7 @@ var CustomizationComponent = CustomizationComponent_1 = (function () {
         var _this = this;
         var NewCustomeUrl = this.config.apiUrl + "/customization/";
         var body = JSON.stringify({
+            UserName: this.currentUser.username,
             FavortieTags: this.newCustomeTags.split(","),
             PostLimit: this.newPostlimit
         });
@@ -62,7 +65,7 @@ var CustomizationComponent = CustomizationComponent_1 = (function () {
         this.http
             .post(NewCustomeUrl, body, options)
             .subscribe(function (data) {
-            _this.http.get(_this.config.apiUrl + _this.url).subscribe(function (result) {
+            _this.http.get(_this.config.apiUrl + _this.url + _this.currentUser.id).subscribe(function (result) {
                 _this.loading = false;
                 _this.customization = result.json();
             }, function (error) { return console.error(error); });
@@ -70,20 +73,20 @@ var CustomizationComponent = CustomizationComponent_1 = (function () {
             console.log(JSON.stringify(error.json()));
         });
     };
+    CustomizationComponent = CustomizationComponent_1 = __decorate([
+        core_1.NgModule({
+            declarations: [CustomizationComponent_1],
+            bootstrap: [CustomizationComponent_1]
+        }),
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'customization',
+            templateUrl: './customization.component.html',
+        }),
+        __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig, router_1.ActivatedRoute, router_1.Router])
+    ], CustomizationComponent);
     return CustomizationComponent;
+    var CustomizationComponent_1;
 }());
-CustomizationComponent = CustomizationComponent_1 = __decorate([
-    core_1.NgModule({
-        declarations: [CustomizationComponent_1],
-        bootstrap: [CustomizationComponent_1]
-    }),
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'customization',
-        templateUrl: './customization.component.html',
-    }),
-    __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig, router_1.ActivatedRoute, router_1.Router])
-], CustomizationComponent);
 exports.CustomizationComponent = CustomizationComponent;
-var CustomizationComponent_1;
 //# sourceMappingURL=customization.component.js.map

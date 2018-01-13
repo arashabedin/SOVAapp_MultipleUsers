@@ -7,6 +7,7 @@ namespace DataService.DomainModel
     public class UserCustomeField
     {
         public int Id { get; set; }
+        public int UserId { get; set; }
         public int Postlimit { get; set; }
         public DateTime CreationDate { get; set; }
         public ICollection<FavoriteTags> FavoriteTags;

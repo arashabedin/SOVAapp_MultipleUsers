@@ -105,10 +105,10 @@ namespace DataService.DataAccessLayer
         int CountFavoriteTags();
 
         //UserCustomeField
-        void AddUserCustomeField(int postLimit, string tags);
+        void AddUserCustomeField(string userName ,int postLimit, string tags);
         Boolean DeleteUserCustomeField(int id);
         UserCustomeFieldDTO GetUserCustomeFieldById(int id);
-        UserCustomeFieldDTO GetLatestUserCustomeField();
+        UserCustomeFieldDTO GetLatestUserCustomeField(int userId);
         ICollection<UserCustomeFieldDTO> GetUserCustomeFields();
         int CountUserCustomeFields();
 

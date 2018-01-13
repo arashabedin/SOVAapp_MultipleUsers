@@ -969,10 +969,11 @@ namespace DataService.DataAccessLayer
 
         ////////////////UserCustomeField
 
-        public void AddUserCustomeField(int postLimit, string tags)
+        public void AddUserCustomeField(string userName, int postLimit, string tags)
         {
             using (var db = new SovaContext())
             {
+                var userId = db.Users.Where(u=> u.Username == userName).First().Id;
 
                 var conn = (MySqlConnection)db.Database.GetDbConnection();
                 conn.Open();
@@ -980,12 +981,13 @@ namespace DataService.DataAccessLayer
                 {
                     Connection = conn
                 };
-
                 cmd.Parameters.Add("@1", DbType.Int32);
-                cmd.Parameters.Add("@2", DbType.String);
-                cmd.Parameters["@1"].Value = postLimit;
-                cmd.Parameters["@2"].Value = tags;
-                cmd.CommandText = "call addUserCustomeField(@1,@2)";
+                cmd.Parameters.Add("@2", DbType.Int32);
+                cmd.Parameters.Add("@3", DbType.String);
+                cmd.Parameters["@1"].Value = userId;
+                cmd.Parameters["@2"].Value = postLimit;
+                cmd.Parameters["@3"].Value = tags;
+                cmd.CommandText = "call addUserCustomeField(@1,@2,@3)";
                 var reader = cmd.ExecuteNonQuery();
 
 
@@ -1022,16 +1024,16 @@ namespace DataService.DataAccessLayer
             {
                 var u = db.UserCustomeField.Where(i => i.Id == id).FirstOrDefault();
 
-                return new UserCustomeFieldDTO(u.Id, u.Postlimit, u.CreationDate, GetFavoriteTagsByCustomeId(id));
+                return new UserCustomeFieldDTO(u.Id,u.UserId, u.Postlimit, u.CreationDate, GetFavoriteTagsByCustomeId(id));
             }
         }
-        public UserCustomeFieldDTO GetLatestUserCustomeField()
+        public UserCustomeFieldDTO GetLatestUserCustomeField(int userId)
         {
             using (var db = new SovaContext())
             {
-                var u = db.UserCustomeField.OrderByDescending(x => x.Id).FirstOrDefault();
+                var u = db.UserCustomeField.Where(i=> i.UserId == userId).OrderByDescending(x => x.Id).FirstOrDefault();
 
-                return new UserCustomeFieldDTO(u.Id, u.Postlimit, u.CreationDate, GetFavoriteTagsByCustomeId(u.Id));
+                return new UserCustomeFieldDTO(u.Id,u.UserId, u.Postlimit, u.CreationDate, GetFavoriteTagsByCustomeId(u.Id));
             }
 
         }
@@ -1045,7 +1047,7 @@ namespace DataService.DataAccessLayer
                 List<UserCustomeFieldDTO> CustomeFieldsDTO = new List<UserCustomeFieldDTO>();
                 foreach (var u in CustomeFields)
                 {
-                    var newCustomeField = new UserCustomeFieldDTO(u.Id, u.Postlimit, u.CreationDate, GetFavoriteTagsByCustomeId(u.Id));
+                    var newCustomeField = new UserCustomeFieldDTO(u.Id,u.UserId, u.Postlimit, u.CreationDate, GetFavoriteTagsByCustomeId(u.Id));
                     CustomeFieldsDTO.Add(newCustomeField);
                 }
                 return CustomeFieldsDTO;

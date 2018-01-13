@@ -14,7 +14,7 @@ var index_1 = require("../_services/index");
 var http_1 = require("@angular/http");
 var router_1 = require("@angular/router");
 var app_config_1 = require("../app.config");
-var HomeComponent = (function () {
+var HomeComponent = /** @class */ (function () {
     function HomeComponent(http, config, userService, route, router) {
         this.http = http;
         this.config = config;
@@ -23,7 +23,7 @@ var HomeComponent = (function () {
         this.router = router;
         this.users = [];
         this.suggestedQurl = '/start';
-        this.customizationUrl = '/customization';
+        this.customizationUrl = '/customization/';
         this.postId = 1;
         this.QNotloaded = true;
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -36,7 +36,7 @@ var HomeComponent = (function () {
             _this.suggestedQuestions = result.json().recommendedQuestions;
             _this.QNotloaded = false;
         }, function (error) { return console.error(error); });
-        this.http.get(this.config.apiUrl + this.customizationUrl).subscribe(function (result) {
+        this.http.get(this.config.apiUrl + this.customizationUrl + this.currentUser.id).subscribe(function (result) {
             _this.customization = result.json();
         }, function (error) { return console.error(error); });
     };
@@ -52,14 +52,14 @@ var HomeComponent = (function () {
     HomeComponent.prototype.goToQuestion = function (id) {
         this.router.navigate(['/question', id]);
     };
+    HomeComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            templateUrl: 'home.component.html'
+        }),
+        __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig, index_1.UserService, router_1.ActivatedRoute, router_1.Router])
+    ], HomeComponent);
     return HomeComponent;
 }());
-HomeComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        templateUrl: 'home.component.html'
-    }),
-    __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig, index_1.UserService, router_1.ActivatedRoute, router_1.Router])
-], HomeComponent);
 exports.HomeComponent = HomeComponent;
 //# sourceMappingURL=home.component.js.map

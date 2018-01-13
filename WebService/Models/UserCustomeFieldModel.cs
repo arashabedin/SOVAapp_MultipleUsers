@@ -8,6 +8,7 @@ namespace WebService.Models
 {
     public class UserCustomeFieldModel
     {
+        public string userName;
         public int postLimit;
         public ICollection<String> FavortieTags;
         public DateTime CreationDate;

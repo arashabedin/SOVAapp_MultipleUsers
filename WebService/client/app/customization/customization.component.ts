@@ -4,6 +4,7 @@ import { Routes, ActivatedRoute, Router, NavigationEnd} from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppConfig } from '../app.config';
+import { User } from '../_models/index';
 
 @NgModule({
     declarations: [CustomizationComponent],
@@ -25,6 +26,7 @@ export class CustomizationComponent implements OnInit{
     newPostlimit: number;
     newCustomeTags: string;
     loading: boolean = true;
+    currentUser: User;
 
     public customization: GetCustomization[];
    // public sampleData: any;
@@ -33,13 +35,14 @@ export class CustomizationComponent implements OnInit{
 
     constructor(private http: Http, private config: AppConfig, private route: ActivatedRoute, private router: Router) {
 
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
         router.events
             .subscribe((event) => {
 
                 if (event instanceof NavigationEnd) {
 
-                    http.get(config.apiUrl + this.url
+                    http.get(config.apiUrl + this.url + this.currentUser.id
                     ).subscribe(result => {
 
                         this.customization = result.json() as GetCustomization[];
@@ -71,6 +74,7 @@ ngOnInit() {
 
         var NewCustomeUrl = this.config.apiUrl + "/customization/";
         var body = JSON.stringify({
+            UserName: this.currentUser.username,
             FavortieTags: this.newCustomeTags.split(","),
             PostLimit: this.newPostlimit
         });
@@ -83,7 +87,7 @@ ngOnInit() {
             )
             .subscribe(data => {
 
-                this.http.get(this.config.apiUrl + this.url
+                this.http.get(this.config.apiUrl + this.url + this.currentUser.id
                 ).subscribe(result => {
                     this.loading = false;
 

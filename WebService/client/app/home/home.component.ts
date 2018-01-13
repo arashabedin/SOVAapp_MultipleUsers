@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
     public customization: GetCustomization;
 
     suggestedQurl = '/start';
-    customizationUrl = '/customization';
+    customizationUrl = '/customization/';
     markingStatus: string;
     postId: number = 1;
     QNotloaded: boolean = true;
@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
             this.QNotloaded = false;
         }, error => console.error(error));
 
-        this.http.get(this.config.apiUrl + this.customizationUrl).subscribe(result => {
+        this.http.get(this.config.apiUrl + this.customizationUrl + this.currentUser.id).subscribe(result => {
             this.customization = result.json() as GetCustomization;
         }, error => console.error(error));
     }

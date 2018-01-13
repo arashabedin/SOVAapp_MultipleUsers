@@ -118,6 +118,7 @@ namespace DataService
             // Table UserCustomeField
             modelBuilder.Entity<UserCustomeField>().ToTable("usercustomefield");
             modelBuilder.Entity<UserCustomeField>().Property(x => x.Id).HasColumnName("id");
+            modelBuilder.Entity<UserCustomeField>().Property(x => x.UserId).HasColumnName("userid");
             modelBuilder.Entity<UserCustomeField>().Property(x => x.Postlimit).HasColumnName("postlimit");
             modelBuilder.Entity<UserCustomeField>().Property(x => x.CreationDate).HasColumnName("creationdate");
             modelBuilder.Entity<UserCustomeField>().HasKey(x => x.Id);

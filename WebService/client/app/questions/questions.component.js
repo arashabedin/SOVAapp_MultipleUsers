@@ -13,7 +13,7 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var router_1 = require("@angular/router");
 var app_config_1 = require("../app.config");
-var QuestionsComponent = (function () {
+var QuestionsComponent = /** @class */ (function () {
     function QuestionsComponent(http, config, route, router) {
         var _this = this;
         this.http = http;
@@ -55,15 +55,15 @@ var QuestionsComponent = (function () {
     QuestionsComponent.prototype.goToQuestion = function (id) {
         this.router.navigate(['/question', id]);
     };
+    QuestionsComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'questions',
+            templateUrl: './questions.component.html'
+        }),
+        __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig, router_1.ActivatedRoute, router_1.Router])
+    ], QuestionsComponent);
     return QuestionsComponent;
 }());
-QuestionsComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'questions',
-        templateUrl: './questions.component.html'
-    }),
-    __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig, router_1.ActivatedRoute, router_1.Router])
-], QuestionsComponent);
 exports.QuestionsComponent = QuestionsComponent;
 //# sourceMappingURL=questions.component.js.map

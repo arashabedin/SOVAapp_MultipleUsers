@@ -29,11 +29,11 @@ namespace WebService.Controllers
 
         }
 
-        [HttpGet(Name = nameof(GetUserCustomeField))]
+        [HttpGet("{userId}", Name = nameof(GetUserCustomeField))]
 
-        public IActionResult GetUserCustomeField()
+        public IActionResult GetUserCustomeField(int userId)
         {
-            var c = _repository.GetLatestUserCustomeField();
+            var c = _repository.GetLatestUserCustomeField(userId);
             if (c != null)
             {
                 var model = new UserCustomeFieldModel();
@@ -54,7 +54,7 @@ namespace WebService.Controllers
             {
                 tagsToString += item + ",";
             }
-            _repository.AddUserCustomeField(obj.postLimit, tagsToString);
+            _repository.AddUserCustomeField(obj.userName, obj.postLimit, tagsToString);
             return Created($"api/customization","Updated the new Customization");
 
         }
