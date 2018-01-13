@@ -14,8 +14,7 @@ export class QuestionsComponent implements OnInit {
     url = '/question?page=' + this.route.snapshot.queryParams["page"] + "&pageSize=12";
     Url = this.route.snapshot.queryParams["url"];
     markingStatus: string;
-
-    hasStarted: boolean = false;
+    isLoaded: boolean = false;
 
 
     constructor(private http: Http, private config: AppConfig, private route: ActivatedRoute, private router: Router) {
@@ -23,15 +22,14 @@ export class QuestionsComponent implements OnInit {
 
         router.events
             .subscribe((event) => {
-                if (this.hasStarted){
                 if (event instanceof NavigationEnd) {
                     var pageNumber = this.route.snapshot.queryParams["page"];
                     console.log(pageNumber);
                     http.get(config.apiUrl + '/question?page=' + pageNumber + "&pageSize=12"
                     ).subscribe(result => {
                         this.questions = result.json() as GetQuestions;
+                        this.isLoaded = true;
                         }, error => console.error(error));
-                }
                 }
 
             });
@@ -42,16 +40,18 @@ export class QuestionsComponent implements OnInit {
 
         this.http.get(this.Url).subscribe(result => {
             this.questions = result.json() as GetQuestions;
-            this.hasStarted = true;
+            this.isLoaded = true;
         }, error => console.error(error));
     }
 
     public goToNextPage(url: string, pageNum: number) {
+        this.isLoaded = false;
         this.url = url;
         this.router.navigate(['/questions'], { queryParams: { page: pageNum + 1 } });
     }
 
     public goToPrevPage(url: string, pageNum: number) {
+        this.isLoaded = false;
         this.url = url;
         this.router.navigate(['/questions'], { queryParams: { page: pageNum - 1 } });
     }

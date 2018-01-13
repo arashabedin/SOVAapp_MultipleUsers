@@ -14,7 +14,7 @@ export class MarkingsComponent {
 
     url = "";
     currentUser: User;
-
+    loaded: boolean = false;
 
 
 
@@ -24,6 +24,7 @@ export class MarkingsComponent {
         this.url = '/marking/all/' + + this.currentUser.id +  +'?page=' + this.route.snapshot.queryParams["page"] + "&pageSize=12";
         http.get(config.apiUrl + this.url).subscribe(result => {
             this.markings = result.json() as GetMarkings;
+            this.loaded = true;
         }, error => console.error(error));
 
         router.events
@@ -35,6 +36,7 @@ export class MarkingsComponent {
                      http.get(config.apiUrl + '/marking/all/' + this.currentUser.id + '?page=' + pageNumber + "&pageSize=12"
                      ).subscribe(result => {
                          this.markings = result.json() as GetMarkings;
+                         this.loaded = true;
                      }, error => console.error(error));
                 }
 
@@ -44,12 +46,14 @@ export class MarkingsComponent {
 
 
 
-    public goToNextPage(url: string,pageNum:number) {
+    public goToNextPage(url: string, pageNum: number) {
+        this.loaded = false;
         this.url = url;
         this.router.navigate(['/markings'], { queryParams: { page: pageNum + 1} });
     }
 
     public goToPrevPage(url: string, pageNum: number) {
+        this.loaded = false;
         this.url = url;
         this.router.navigate(['/markings'], { queryParams: { page: pageNum - 1 } });
     }
@@ -63,6 +67,5 @@ export class MarkingsComponent {
 
 
 interface GetMarkings {
-    page: number;
 }
 

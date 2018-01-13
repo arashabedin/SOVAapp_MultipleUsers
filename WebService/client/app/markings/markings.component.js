@@ -13,7 +13,7 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var router_1 = require("@angular/router");
 var app_config_1 = require("../app.config");
-var MarkingsComponent = (function () {
+var MarkingsComponent = /** @class */ (function () {
     function MarkingsComponent(http, config, route, router) {
         var _this = this;
         this.http = http;
@@ -21,10 +21,12 @@ var MarkingsComponent = (function () {
         this.route = route;
         this.router = router;
         this.url = "";
+        this.loaded = false;
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.url = '/marking/all/' + +this.currentUser.id + +'?page=' + this.route.snapshot.queryParams["page"] + "&pageSize=12";
         http.get(config.apiUrl + this.url).subscribe(function (result) {
             _this.markings = result.json();
+            _this.loaded = true;
         }, function (error) { return console.error(error); });
         router.events
             .subscribe(function (event) {
@@ -33,30 +35,33 @@ var MarkingsComponent = (function () {
                 console.log(pageNumber);
                 http.get(config.apiUrl + '/marking/all/' + _this.currentUser.id + '?page=' + pageNumber + "&pageSize=12").subscribe(function (result) {
                     _this.markings = result.json();
+                    _this.loaded = true;
                 }, function (error) { return console.error(error); });
             }
         });
     }
     MarkingsComponent.prototype.goToNextPage = function (url, pageNum) {
+        this.loaded = false;
         this.url = url;
         this.router.navigate(['/markings'], { queryParams: { page: pageNum + 1 } });
     };
     MarkingsComponent.prototype.goToPrevPage = function (url, pageNum) {
+        this.loaded = false;
         this.url = url;
         this.router.navigate(['/markings'], { queryParams: { page: pageNum - 1 } });
     };
     MarkingsComponent.prototype.goToQuestion = function (id) {
         this.router.navigate(['/question', id]);
     };
+    MarkingsComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'markings',
+            templateUrl: './markings.component.html'
+        }),
+        __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig, router_1.ActivatedRoute, router_1.Router])
+    ], MarkingsComponent);
     return MarkingsComponent;
 }());
-MarkingsComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'markings',
-        templateUrl: './markings.component.html'
-    }),
-    __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig, router_1.ActivatedRoute, router_1.Router])
-], MarkingsComponent);
 exports.MarkingsComponent = MarkingsComponent;
 //# sourceMappingURL=markings.component.js.map
