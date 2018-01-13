@@ -103,6 +103,8 @@ namespace DataService
             // Table Marking
             modelBuilder.Entity<Marking>().ToTable("marking");
             modelBuilder.Entity<Marking>().Property(m => m.MarkedPostId).HasColumnName("markedpostid");
+            modelBuilder.Entity<Marking>().Property(m => m.UserId).HasColumnName("userid");
+            modelBuilder.Entity<Marking>().Property(m => m.PostId).HasColumnName("postid");
             modelBuilder.Entity<Marking>().Property(x => x.MarkingDate).HasColumnName("markingdate");
 
             // Table Annotation

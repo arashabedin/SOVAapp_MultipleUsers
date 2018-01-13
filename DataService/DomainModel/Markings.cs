@@ -9,6 +9,8 @@ namespace DataService.DomainModel
     {
         [Key]
         public int MarkedPostId { get; set; }
+        public int UserId { get; set; }
+        public int PostId { get; set; }
         public DateTime MarkingDate { get; set; }
         public Annotations Annotations;
 

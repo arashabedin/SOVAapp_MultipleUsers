@@ -55,12 +55,7 @@ namespace WebService.Controllers
                  //   AcceptedAnswerUrl = Url.Link(nameof(AnswerController.GetAnswerById), new { Qid = x.Id, Aid = x.AcceptedAnswerId }),
                     //AnswersUrl = Url.Link(nameof(AnswerController.GetAnswersByQuestionId), new { Qid = x.Id }),
                    // CommentsUrl = Url.Link(nameof(CommentController.GetCommentsByQuestionId), new { Qid = x.Id }),
-                    MarkThisPost = _repository.GetMarkingById(x.Id)== null?
-                    Url.Link(nameof(MarkingController.AddMarking),new {Pid= x.Id }):
-                    "Already marked",
-                    UnMarkPost = _repository.GetMarkingById(x.Id) == null ?
-                    "Not marked yet" 
-                    : Url.Link(nameof(MarkingController.RemoveMarking), new { Pid = x.Id }),
+                  
 
                 });
 
@@ -81,8 +76,8 @@ namespace WebService.Controllers
 
         // Get Question by Id
 
-        [HttpGet("question/{Qid}", Name = nameof(GetQuestionById))]
-    public IActionResult GetQuestionById(int Qid)
+        [HttpGet("question/{Uid}/{Qid}", Name = nameof(GetQuestionById))]
+    public IActionResult GetQuestionById(int Uid, int Qid)
     {
 
         var Question = _repository.GetQuestionById(Qid);
@@ -102,15 +97,15 @@ namespace WebService.Controllers
         model.AcceptedAnswerUrl = Url.Link(nameof(AnswerController.GetAnswerById), new { id = Question.AcceptedAnswerId });
         model.AnswersUrl = Url.Link(nameof(AnswerController.GetAnswersByQuestionId), new { Qid = Question.Id });
         model.CommentsUrl = Url.Link(nameof(CommentController.GetCommentsByQuestionId), new { Qid = Question.Id });
-        model.MarkThisPost = _repository.GetMarkingById(Question.Id) == null ?
-              Url.Link(nameof(MarkingController.AddMarking), new { Pid = Question.Id }) :
-              "Already marked";
-        model.UnMarkPost = _repository.GetMarkingById(Question.Id) == null ?
-              "Not marked yet"
-              : Url.Link(nameof(MarkingController.RemoveMarking), new { Pid = Question.Id });
+        model.MarkThisPost = _repository.GetMarkingById(Uid,Question.Id) == null ?
+                     Url.Link(nameof(MarkingController.AddMarking), new { Uid = Uid ,Pid = Question.Id }) :
+                     "Already marked";
+       model.UnMarkPost = _repository.GetMarkingById(Uid,Question.Id) == null ?
+                  "Not marked yet"
+                  : Url.Link(nameof(MarkingController.RemoveMarking), new { Uid = Uid, Pid = Question.Id });
 
 
-        return Ok(model);
+            return Ok(model);
     }
 
         // Questions of A user
@@ -142,9 +137,7 @@ namespace WebService.Controllers
                     AcceptedAnswerUrl = Url.Link(nameof(AnswerController.GetAnswerById), new { id = x.AcceptedAnswerId }),
                     AnswersUrl = Url.Link(nameof(AnswerController.GetAnswersByQuestionId), new { Qid = x.Id }),
                     CommentsUrl = Url.Link(nameof(CommentController.GetCommentsByQuestionId), new { Qid = x.Id }),
-                    MarkThisPost = _repository.GetMarkingById(x.Id) == null ?
-                      Url.Link(nameof(MarkingController.AddMarking), new { Pid = x.Id}) :
-                      "Already marked",
+              
 
         });
 

@@ -71,12 +71,12 @@ namespace DataService.DataAccessLayer
         bool UserHasQuestion(int id);
 
         //Markings
-        Boolean AddMarking(int postId);
+        Boolean AddMarking(int userId,int postId);
         bool AddMarkingWithAnnotation(int postId, string text, int from, int to);
-        Boolean RemoveMarking(int id);
-        MarkingDTO GetMarkingById(int id);
-        ICollection<MarkingDTO> GetMarkings(int page, int pageSize);
-        int CountMarkings();
+        Boolean RemoveMarking(int uid,int id);
+        MarkingDTO GetMarkingById(int Uid,int id);
+        ICollection<MarkingDTO> GetMarkings(int Uid,int page, int pageSize);
+        int CountMarkings(int Uid);
 
         //Annotations
         AnnotationsDTO AddAnnotation(int primaryKey, string text,int from, int to);
@@ -131,7 +131,6 @@ namespace DataService.DataAccessLayer
         TermNetworkMakerDTO GenerateTermNetworkCode(string word);
 
         //SOVA APP Users
-
         User Authenticate(string username, string password);
         ICollection<User> GetAllSovaUsers();
         User GetById(int id);

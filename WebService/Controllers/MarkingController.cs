@@ -22,17 +22,19 @@ namespace WebService.Controllers
 
         }
 
-        [HttpGet("{Pid}",Name =nameof(GetMarking) )]
-        public IActionResult GetMarking(int Pid) {
-            var markedPost = _repository.GetMarkingById(Pid);
+        [HttpGet("{Uid}/{Pid}",Name =nameof(GetMarking) )]
+        public IActionResult GetMarking(int Uid,int Pid) {
+            var markedPost = _repository.GetMarkingById(Uid,Pid);
             var newMarkingModel = new MarkingModel();
-            newMarkingModel.PostId = Pid;
-            newMarkingModel.MarkingUrl = Url.Link(nameof(GetMarking), new { Pid = markedPost.MarkedPostId });
+            newMarkingModel.MarkingId = markedPost.MarkedPostId;
+            newMarkingModel.UserId = markedPost.UserId;
+            newMarkingModel.PostId = markedPost.PostId;
+            newMarkingModel.MarkingUrl = Url.Link(nameof(GetMarking), new { Uid= markedPost.UserId , Pid = markedPost.MarkedPostId });
             // Checking whether the post is an answer or question to give it the correct link
-            newMarkingModel.PostUrl = _repository.GetPostById(markedPost.MarkedPostId).PostTypeId == 2 ?
-                  Url.Link(nameof(AnswerController.GetAnswerById), new { Qid = _repository.GetPostById(markedPost.MarkedPostId).ParentId, Aid = markedPost.MarkedPostId }) :
-                  Url.Link(nameof(QuestionController.GetQuestionById), new { Qid = markedPost.MarkedPostId });
-            newMarkingModel.RemoveMarking = Url.Link(nameof(RemoveMarking), new { Pid = markedPost.MarkedPostId });
+            newMarkingModel.PostUrl = _repository.GetPostById(markedPost.PostId).PostTypeId == 2 ?
+                  Url.Link(nameof(AnswerController.GetAnswerById), new { Qid = _repository.GetPostById(markedPost.PostId).ParentId, Aid = markedPost.MarkedPostId }) :
+                  Url.Link(nameof(QuestionController.GetQuestionById), new { Qid = markedPost.PostId });
+            newMarkingModel.RemoveMarking = Url.Link(nameof(RemoveMarking), new { Mid = markedPost.MarkedPostId });
           
             // Checking whether there's annotation or not
             newMarkingModel.MarkingAnnotation = _repository.GetAnnotationsByMarkingId(markedPost.MarkedPostId).ToList().Select(a => new AnnotationModel
@@ -46,7 +48,7 @@ namespace WebService.Controllers
 
             }).ToList();
 
-            newMarkingModel.PostTitle = _repository.GetPostById(markedPost.MarkedPostId).Title;
+            newMarkingModel.PostTitle = _repository.GetPostById(markedPost.PostId).Title;
             newMarkingModel.MarkedDate = markedPost.MarkingDate;
             newMarkingModel.AddAnnotation = Url.Link(nameof(AnnotationController.AddAnnotation), new { Pid = markedPost.MarkedPostId, text = "NewAnnotation", from = 0, to = 0 });
 
@@ -55,28 +57,28 @@ namespace WebService.Controllers
         }
 
         // Get All Markings
-        [HttpGet( Name = nameof(GetMarkings))]
-        public IActionResult GetMarkings(int page = 0, int pageSize = 8)
+        [HttpGet("all/{Uid}", Name = nameof(GetMarkings))]
+        public IActionResult GetMarkings(int Uid,int page = 0, int pageSize = 8)
         {
             CheckPageSize(ref pageSize);
 
-            var total = _repository.CountMarkings();
+            var total = _repository.CountMarkings(Uid);
             var totalPages = GetTotalPages(pageSize, total);
 
-            var data = _repository.GetMarkings(page, pageSize)
+            var data = _repository.GetMarkings(Uid, page, pageSize)
                 .Select(x => new MarkingModel
                 {
-                   PostId = x.MarkedPostId,
+                   PostId = x.PostId,
                     MarkingUrl = Url.Link(nameof(GetMarking), new { Pid = x.MarkedPostId }),
                     // Checking whether the post is an answer or question to give it the correct link
-                    PostUrl = _repository.GetPostById(x.MarkedPostId).PostTypeId == 2 ?
-                      Url.Link(nameof(AnswerController.GetAnswerById), new { Qid = _repository.GetPostById(x.MarkedPostId).ParentId, Aid = x.MarkedPostId }) :
-                      Url.Link(nameof(QuestionController.GetQuestionById), new { Qid = x.MarkedPostId }),
-                    RemoveMarking = Url.Link(nameof(RemoveMarking), new {Pid =x.MarkedPostId }),
+                    PostUrl = _repository.GetPostById(x.PostId).PostTypeId == 2 ?
+                      Url.Link(nameof(AnswerController.GetAnswerById), new { Qid = _repository.GetPostById(x.PostId).ParentId, Aid = x.MarkedPostId }) :
+                      Url.Link(nameof(QuestionController.GetQuestionById), new { Qid = x.PostId }),
+                    RemoveMarking = Url.Link(nameof(RemoveMarking), new {Pid =x.PostId }),
                     // Checking whether there's annotation or not
                     MarkingAnnotation = _repository.GetAnnotationsByMarkingId(x.MarkedPostId).ToList().Select(a => new AnnotationModel
                     {
-                        MarkingLink = Url.Link(nameof(GetMarking), new { Pid = a.MarkedPostId }),
+                        MarkingLink = Url.Link(nameof(GetMarking), new { Mid = a.MarkedPostId }),
                         AnnotationText = a.Annotation,
                         From = a.From,
                         To = a.To,
@@ -89,7 +91,7 @@ namespace WebService.Controllers
 
 
 
-            PostTitle = _repository.GetPostById(x.MarkedPostId).Title,
+            PostTitle = _repository.GetPostById(x.PostId).Title,
                 MarkedDate = x.MarkingDate,
                  AddAnnotation = Url.Link(nameof(AnnotationController.AddAnnotation), new { Pid = x.MarkedPostId, text = "NewAnnotation", from = 0, to = 0 })
 
@@ -112,18 +114,20 @@ namespace WebService.Controllers
         }
 
 
-        [HttpPost("{Pid}",Name = nameof(AddMarking))]
-        public IActionResult AddMarking(int Pid)
+        [HttpPost("{Uid}/{Pid}", Name = nameof(AddMarking))]
+        public IActionResult AddMarking(int Uid, int Pid)
         {
-            _repository.AddMarking(Pid);
-            var markedPost = _repository.GetMarkingById(Pid);
+            _repository.AddMarking(Uid,Pid);
+            var markedPost = _repository.GetMarkingById(Uid,Pid);
             var newMarkingModel = new MarkingModel();
+            newMarkingModel.MarkingId = markedPost.MarkedPostId;
+            newMarkingModel.UserId = markedPost.UserId;
             newMarkingModel.PostId = Pid;
             newMarkingModel.MarkingUrl = Url.Link(nameof(GetMarking), new { Pid = markedPost.MarkedPostId });
             // Checking whether the post is an answer or question to give it the correct link
-            newMarkingModel.PostUrl = _repository.GetPostById(markedPost.MarkedPostId).PostTypeId == 2 ?
-                     Url.Link(nameof(AnswerController.GetAnswerById), new { Qid = _repository.GetPostById(markedPost.MarkedPostId).ParentId, Aid = markedPost.MarkedPostId }) :
-                     Url.Link(nameof(QuestionController.GetQuestionById), new { Qid = markedPost.MarkedPostId });
+            newMarkingModel.PostUrl = _repository.GetPostById(markedPost.PostId).PostTypeId == 2 ?
+                     Url.Link(nameof(AnswerController.GetAnswerById), new { Qid = _repository.GetPostById(markedPost.PostId).ParentId, Aid = markedPost.PostId }) :
+                     Url.Link(nameof(QuestionController.GetQuestionById), new { Qid = markedPost.PostId });
             // Checking whether there's annotation or not
             newMarkingModel.MarkingAnnotation = _repository.GetAnnotationsByMarkingId(markedPost.MarkedPostId).ToList().Select(a => new AnnotationModel
             {
@@ -139,45 +143,16 @@ namespace WebService.Controllers
 
             newMarkingModel.AddAnnotation = Url.Link(nameof(AnnotationController.AddAnnotation), new { Pid = markedPost.MarkedPostId, text = "NewAnnotation", from = 0, to = 0 });
 
-            return Created($"api/marking/{Pid}", newMarkingModel);
+            return Created($"api/marking/{markedPost.MarkedPostId}", newMarkingModel);
 
         }
 
-        [HttpPost("{Pid}/{annotation}", Name = nameof(AddMarkingWithAnnotation))]
-        public IActionResult AddMarkingWithAnnotation(int Pid, string annotation)
-                {
-                    _repository.AddMarkingWithAnnotation(Pid, annotation,0,0);
-                    var markedPost = _repository.GetMarkingById(Pid);
-                    var newMarkingModel = new MarkingModel();
-            newMarkingModel.PostId = Pid;
-            // Checking whether the post is an answer or question to give it the correct link
-            newMarkingModel.MarkingUrl = Url.Link(nameof(GetMarking), new { Pid = markedPost.MarkedPostId});
-                    newMarkingModel.PostUrl = _repository.GetPostById(markedPost.MarkedPostId).PostTypeId == 2 ?
-                             Url.Link(nameof(AnswerController.GetAnswerById), new { Qid = _repository.GetPostById(markedPost.MarkedPostId).ParentId, Aid = markedPost.MarkedPostId }) :
-                             Url.Link(nameof(QuestionController.GetQuestionById), new { Qid = markedPost.MarkedPostId });
-            newMarkingModel.MarkingAnnotation = _repository.GetAnnotationsByMarkingId(markedPost.MarkedPostId).ToList().Select(a => new AnnotationModel
-            {
-                MarkingLink = Url.Link(nameof(GetMarking), new { Qid = a.MarkedPostId }),
-                AnnotationText = a.Annotation,
-                From = a.From,
-                To = a.To,
-                EditAnnotation = Url.Link(nameof(AnnotationController.EditAnnotation), new { AnnotId = a.Annotationid, text = "SampleText" }),
-                RemoveAnnotation = Url.Link(nameof(AnnotationController.EditAnnotation), new {Pid = a.MarkedPostId })
 
-            }).ToList();
-               newMarkingModel.MarkedDate = markedPost.MarkingDate;
-               newMarkingModel.AddAnnotation = Url.Link(nameof(AnnotationController.AddAnnotation), new { Pid = markedPost.MarkedPostId, text = "New_Annotation", from = 0, to = 0 });
-
-            return Created($"api/marking/{Pid}/{annotation}", newMarkingModel);
-
-                }
-                
-
-        [HttpDelete("{Pid}", Name = nameof(RemoveMarking))]
-        public IActionResult RemoveMarking(int Pid)
+        [HttpDelete("{Uid}/{Pid}", Name = nameof(RemoveMarking))]
+        public IActionResult RemoveMarking(int Uid,int Pid)
         {
            
-           var marking =  _repository.RemoveMarking(Pid);
+           var marking =  _repository.RemoveMarking(Uid,Pid);
             if (!marking)
             {
                 return NotFound();

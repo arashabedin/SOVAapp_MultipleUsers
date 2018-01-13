@@ -583,7 +583,7 @@ namespace DataService.DataAccessLayer
 
         ////////////////Marking
 
-        public bool AddMarking(int postId)
+        public bool AddMarking(int userId,int postId)
         {
             using (var db = new SovaContext())
             {
@@ -594,10 +594,11 @@ namespace DataService.DataAccessLayer
                 {
                     Connection = conn
                 };
-
                 cmd.Parameters.Add("@1", DbType.Int32);
-                cmd.Parameters["@1"].Value = postId;
-                cmd.CommandText = "call updateMarking(@1)";
+                cmd.Parameters.Add("@2", DbType.Int32);
+                cmd.Parameters["@1"].Value = userId;
+                cmd.Parameters["@2"].Value = postId;
+                cmd.CommandText = "call updateMarking(@1,@2)";
                 var executer = cmd.ExecuteNonQuery();
                 return true;
 
@@ -628,14 +629,14 @@ namespace DataService.DataAccessLayer
             }
 
         }
-        public bool RemoveMarking(int id)
+        public bool RemoveMarking(int uid,int id)
         {
             using (var db = new SovaContext())
             {
-                var marking = db.Markings.FirstOrDefault(m => m.MarkedPostId == id);
+                var marking = db.Markings.Where(u => u.UserId == uid).Where(p => p.PostId == id).FirstOrDefault();
                if (marking != null)
                 {
-                    DeleteAnnotationsByMarkingId(id);
+                    DeleteAnnotationsByMarkingId(marking.MarkedPostId);
                     db.Markings.Remove(marking);
 
                     db.SaveChanges();
@@ -644,38 +645,38 @@ namespace DataService.DataAccessLayer
                 return false;
             }
         }
-       public MarkingDTO GetMarkingById(int id)
+       public MarkingDTO GetMarkingById(int Uid ,int id)
         {
             using (var db = new SovaContext())
             {
-                var marking = db.Markings.FirstOrDefault(m => m.MarkedPostId == id);
+                var marking = db.Markings.Where(u => u.UserId == Uid).Where(m => m.PostId == id).FirstOrDefault();
                 if (marking != null) { 
-                return new MarkingDTO(marking.MarkedPostId, marking.MarkingDate, GetAnnotationById(id));
+                return new MarkingDTO(marking.MarkedPostId,marking.UserId, marking.PostId, marking.MarkingDate, GetAnnotationById(id));
                 } return null;
             }
 
         }
-       public ICollection<MarkingDTO> GetMarkings(int page, int pageSize)
+       public ICollection<MarkingDTO> GetMarkings(int Uid ,int page, int pageSize)
         {
 
             using (var db = new SovaContext())
             {
-                var markings = db.Markings.OrderByDescending(x => x.MarkingDate).Skip(page * pageSize)
+                var markings = db.Markings.Where(u=> u.UserId == Uid).OrderByDescending(x => x.MarkingDate).Skip(page * pageSize)
                     .Take(pageSize).ToList();
                 List<MarkingDTO> markingsDTO = new List<MarkingDTO>();
                 foreach (var item in markings)
                 {
-                    MarkingDTO newMarking = new MarkingDTO(item.MarkedPostId, item.MarkingDate, GetAnnotationById(item.MarkedPostId));
+                    MarkingDTO newMarking = new MarkingDTO(item.MarkedPostId, item.UserId, item.PostId, item.MarkingDate, GetAnnotationById(item.MarkedPostId));
                     markingsDTO.Add(newMarking);
                 }
                 return markingsDTO.ToList();
 
             }
         }
-        public int CountMarkings() {
+        public int CountMarkings(int Uid) {
             using (var db = new SovaContext())
             {
-                return db.Markings.Count();
+                return db.Markings.Where(u=> u.UserId == Uid).Count();
             }
         }
 

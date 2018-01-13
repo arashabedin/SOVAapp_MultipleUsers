@@ -13,7 +13,7 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var router_1 = require("@angular/router");
 var app_config_1 = require("../app.config");
-var QuestionComponent = /** @class */ (function () {
+var QuestionComponent = (function () {
     function QuestionComponent(http, config, route, router) {
         var _this = this;
         this.http = http;
@@ -23,9 +23,11 @@ var QuestionComponent = /** @class */ (function () {
         this.questionReady = false;
         this.isMarked = false;
         // public sampleData: any;
-        this.url = '/question/' + this.route.snapshot.paramMap.get('id');
+        this.url = "";
         this.newId = 0;
-        this.myAnnotationUrl = config.apiUrl + '/marking/' + this.route.snapshot.paramMap.get('id');
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.url = '/question/' + this.currentUser.id + '/' + this.route.snapshot.paramMap.get('id');
+        this.myAnnotationUrl = config.apiUrl + '/marking/' + this.currentUser.id + '/' + this.route.snapshot.paramMap.get('id');
         router.events
             .subscribe(function (event) {
             if (event instanceof router_1.NavigationEnd) {
@@ -43,11 +45,11 @@ var QuestionComponent = /** @class */ (function () {
     QuestionComponent.prototype.goToQuestion = function (id) {
         //this.router.navigate(['']);
         this.router.navigate(['/question', id]);
-        this.url = '/question/' + id;
+        this.url = '/question/' + this.currentUser.id + '/' + id;
     };
     QuestionComponent.prototype.markThis = function () {
         var _this = this;
-        var AddMarkingUrl = "/marking/" + this.route.snapshot.paramMap.get('id');
+        var AddMarkingUrl = "/marking/" + this.currentUser.id + '/' + this.route.snapshot.paramMap.get('id');
         var body = "";
         this.http
             .post(this.config.apiUrl + AddMarkingUrl, body)
@@ -59,7 +61,7 @@ var QuestionComponent = /** @class */ (function () {
     };
     QuestionComponent.prototype.unMarkThis = function () {
         var _this = this;
-        var deleteMarkingUrl = "/marking/" + this.route.snapshot.paramMap.get('id');
+        var deleteMarkingUrl = "/marking/" + this.currentUser.id + '/' + this.route.snapshot.paramMap.get('id');
         var body = "";
         this.http
             .delete(this.config.apiUrl + deleteMarkingUrl, body)
@@ -69,15 +71,15 @@ var QuestionComponent = /** @class */ (function () {
             console.log(JSON.stringify(error.json()));
         });
     };
-    QuestionComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'question',
-            templateUrl: './question.component.html',
-        }),
-        __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig, router_1.ActivatedRoute, router_1.Router])
-    ], QuestionComponent);
     return QuestionComponent;
 }());
+QuestionComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'question',
+        templateUrl: './question.component.html',
+    }),
+    __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig, router_1.ActivatedRoute, router_1.Router])
+], QuestionComponent);
 exports.QuestionComponent = QuestionComponent;
 //# sourceMappingURL=question.component.js.map

@@ -7,6 +7,7 @@ import { AnnotationsComponent } from '../Annotations/Annotations.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppConfig } from '../app.config';
+import { User } from '../_models/index';
 
 
 @Component({
@@ -20,16 +21,18 @@ export class QuestionComponent implements OnInit{
     questionReady: boolean = false;
     isMarked: boolean = false;
     myAnnotationUrl: string;
+    currentUser: User;
 
     public question: GetQuestion[];
    // public sampleData: any;
 
-    url = '/question/' + this.route.snapshot.paramMap.get('id');
+    url = "";
     newId:number = 0;
     constructor(private http: Http, private config: AppConfig, private route: ActivatedRoute, private router: Router) {
 
-        this.myAnnotationUrl = config.apiUrl + '/marking/' + this.route.snapshot.paramMap.get('id');
-
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.url = '/question/' + this.currentUser.id+ '/' + this.route.snapshot.paramMap.get('id');
+        this.myAnnotationUrl = config.apiUrl + '/marking/' + this.currentUser.id + '/'+ this.route.snapshot.paramMap.get('id');
         router.events
             .subscribe((event) => {
 
@@ -59,13 +62,13 @@ ngOnInit() {
     public goToQuestion(id: number) {
         //this.router.navigate(['']);
         this.router.navigate(['/question', id]);
-        this.url = '/question/' + id;
+        this.url = '/question/' + this.currentUser.id + '/' + id;
 
 }
 
 
     public markThis() {
-        var AddMarkingUrl = "/marking/" + this.route.snapshot.paramMap.get('id');
+        var AddMarkingUrl = "/marking/" + this.currentUser.id + '/' + this.route.snapshot.paramMap.get('id');
         var body = "";
         this.http
             .post(this.config.apiUrl + AddMarkingUrl,
@@ -82,7 +85,7 @@ ngOnInit() {
     }
 
     public unMarkThis() {
-        var deleteMarkingUrl = "/marking/" + this.route.snapshot.paramMap.get('id');
+        var deleteMarkingUrl = "/marking/" + this.currentUser.id + '/' + this.route.snapshot.paramMap.get('id');
         var body = "";
         this.http
             .delete(this.config.apiUrl + deleteMarkingUrl,

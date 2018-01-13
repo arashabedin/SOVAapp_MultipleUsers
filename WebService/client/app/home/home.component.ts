@@ -2,7 +2,6 @@
 
 import { User } from '../_models/index';
 import { UserService } from '../_services/index';
-
 import { Http } from '@angular/http';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AppConfig } from '../app.config';

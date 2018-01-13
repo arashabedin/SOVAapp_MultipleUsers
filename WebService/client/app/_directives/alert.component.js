@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var index_1 = require("../_services/index");
-var AlertComponent = /** @class */ (function () {
+var AlertComponent = (function () {
     function AlertComponent(alertService) {
         this.alertService = alertService;
     }
@@ -19,15 +19,15 @@ var AlertComponent = /** @class */ (function () {
         var _this = this;
         this.alertService.getMessage().subscribe(function (message) { _this.message = message; });
     };
-    AlertComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'alert',
-            templateUrl: 'alert.component.html'
-        }),
-        __metadata("design:paramtypes", [index_1.AlertService])
-    ], AlertComponent);
     return AlertComponent;
 }());
+AlertComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'alert',
+        templateUrl: 'alert.component.html'
+    }),
+    __metadata("design:paramtypes", [index_1.AlertService])
+], AlertComponent);
 exports.AlertComponent = AlertComponent;
 //# sourceMappingURL=alert.component.js.map

@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AppConfig } from '../app.config';
+import { User } from '../_models/index';
 
 @Component({
     moduleId: module.id,
@@ -11,13 +12,16 @@ import { AppConfig } from '../app.config';
 export class MarkingsComponent {
     public markings: GetMarkings;
 
-    url = '/marking?page=' + this.route.snapshot.queryParams["page"] + "&pageSize=12";
+    url = "";
+    currentUser: User;
 
 
 
 
 
     constructor(private http: Http, private config: AppConfig, private route: ActivatedRoute, private router: Router) {
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.url = '/marking/all/' + + this.currentUser.id +  +'?page=' + this.route.snapshot.queryParams["page"] + "&pageSize=12";
         http.get(config.apiUrl + this.url).subscribe(result => {
             this.markings = result.json() as GetMarkings;
         }, error => console.error(error));
@@ -28,7 +32,7 @@ export class MarkingsComponent {
                 if (event instanceof NavigationEnd) {
                      var pageNumber = this.route.snapshot.queryParams["page"];
                      console.log(pageNumber);
-                     http.get(config.apiUrl + '/marking?page=' + pageNumber + "&pageSize=12"
+                     http.get(config.apiUrl + '/marking/all/' + this.currentUser.id + '?page=' + pageNumber + "&pageSize=12"
                      ).subscribe(result => {
                          this.markings = result.json() as GetMarkings;
                      }, error => console.error(error));
