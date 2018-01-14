@@ -13,7 +13,7 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 require("rxjs/add/operator/map");
 var app_config_1 = require("../app.config");
-var AuthenticationService = /** @class */ (function () {
+var AuthenticationService = (function () {
     function AuthenticationService(http, config) {
         this.http = http;
         this.config = config;
@@ -33,11 +33,11 @@ var AuthenticationService = /** @class */ (function () {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
     };
-    AuthenticationService = __decorate([
-        core_1.Injectable(),
-        __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig])
-    ], AuthenticationService);
     return AuthenticationService;
 }());
+AuthenticationService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig])
+], AuthenticationService);
 exports.AuthenticationService = AuthenticationService;
 //# sourceMappingURL=authentication.service.js.map

@@ -29,7 +29,7 @@ namespace WebService.Controllers
             newMarkingModel.MarkingId = markedPost.MarkedPostId;
             newMarkingModel.UserId = markedPost.UserId;
             newMarkingModel.PostId = markedPost.PostId;
-            newMarkingModel.MarkingUrl = Url.Link(nameof(GetMarking), new { Uid= markedPost.UserId , Pid = markedPost.MarkedPostId });
+            newMarkingModel.MarkingUrl = Url.Link(nameof(GetMarking), new { Uid= markedPost.UserId , Pid = markedPost.PostId });
             // Checking whether the post is an answer or question to give it the correct link
             newMarkingModel.PostUrl = _repository.GetPostById(markedPost.PostId).PostTypeId == 2 ?
                   Url.Link(nameof(AnswerController.GetAnswerById), new { Qid = _repository.GetPostById(markedPost.PostId).ParentId, Aid = markedPost.MarkedPostId }) :
@@ -69,23 +69,23 @@ namespace WebService.Controllers
                 .Select(x => new MarkingModel
                 {
                    PostId = x.PostId,
-                    MarkingUrl = Url.Link(nameof(GetMarking), new { Pid = x.MarkedPostId }),
+                    MarkingUrl = Url.Link(nameof(GetMarking), new { Pid = x.PostId }),
                     // Checking whether the post is an answer or question to give it the correct link
                     PostUrl = _repository.GetPostById(x.PostId).PostTypeId == 2 ?
                       Url.Link(nameof(AnswerController.GetAnswerById), new { Qid = _repository.GetPostById(x.PostId).ParentId, Aid = x.MarkedPostId }) :
                       Url.Link(nameof(QuestionController.GetQuestionById), new { Qid = x.PostId }),
                     RemoveMarking = Url.Link(nameof(RemoveMarking), new {Pid =x.PostId }),
                     // Checking whether there's annotation or not
-                    MarkingAnnotation = _repository.GetAnnotationsByMarkingId(x.MarkedPostId).ToList().Select(a => new AnnotationModel
-                    {
-                        MarkingLink = Url.Link(nameof(GetMarking), new { Mid = a.MarkedPostId }),
-                        AnnotationText = a.Annotation,
-                        From = a.From,
-                        To = a.To,
-                        EditAnnotation = Url.Link(nameof(AnnotationController.EditAnnotation), new {Pid=a.MarkedPostId, AnnotId = a.Annotationid, text = a.Annotation }),
-                        RemoveAnnotation = Url.Link(nameof(AnnotationController.RemoveAnnotation), new { Pid = a.MarkedPostId, AnnotId = a.Annotationid })
+                    //MarkingAnnotation = _repository.GetAnnotationsByMarkingId(x.MarkedPostId).ToList().Select(a => new AnnotationModel
+                    //{
+                    //    MarkingLink = Url.Link(nameof(GetMarking), new { Mid = a.MarkedPostId }),
+                    //    AnnotationText = a.Annotation,
+                    //    From = a.From,
+                    //    To = a.To,
+                    //    EditAnnotation = Url.Link(nameof(AnnotationController.EditAnnotation), new {Pid=a.MarkedPostId, AnnotId = a.Annotationid, text = a.Annotation }),
+                    //    RemoveAnnotation = Url.Link(nameof(AnnotationController.RemoveAnnotation), new { Pid = a.MarkedPostId, AnnotId = a.Annotationid })
 
-                    }).ToList(),
+                    //}).ToList(),
 
 
 
