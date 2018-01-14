@@ -21,7 +21,7 @@ export class MarkingsComponent {
 
     constructor(private http: Http, private config: AppConfig, private route: ActivatedRoute, private router: Router) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        this.url = '/marking/all/' + + this.currentUser.id +  +'?page=' + this.route.snapshot.queryParams["page"] + "&pageSize=12";
+        this.url = '/marking/all/' +  this.currentUser.id  +'?page=' + this.route.snapshot.queryParams["page"] + "&pageSize=12";
         http.get(config.apiUrl + this.url).subscribe(result => {
             this.markings = result.json() as GetMarkings;
             this.loaded = true;

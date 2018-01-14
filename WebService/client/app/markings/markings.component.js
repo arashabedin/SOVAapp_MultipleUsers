@@ -23,7 +23,7 @@ var MarkingsComponent = /** @class */ (function () {
         this.url = "";
         this.loaded = false;
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        this.url = '/marking/all/' + +this.currentUser.id + +'?page=' + this.route.snapshot.queryParams["page"] + "&pageSize=12";
+        this.url = '/marking/all/' + this.currentUser.id + '?page=' + this.route.snapshot.queryParams["page"] + "&pageSize=12";
         http.get(config.apiUrl + this.url).subscribe(function (result) {
             _this.markings = result.json();
             _this.loaded = true;
