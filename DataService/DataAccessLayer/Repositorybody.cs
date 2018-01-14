@@ -900,14 +900,16 @@ namespace DataService.DataAccessLayer
             using (var db = new SovaContext())
             {
 
-                var searchHistories = db.SearchHistory.GroupBy(x => x.SearchContent).Select(g => g.First()).OrderByDescending(x => x.SearchDate)
-                    .Skip(page * pageSize)
-                    .Take(pageSize);
+                var searchHistories = db.SearchHistory.GroupBy(q => q.SearchContent)
+                                    .OrderByDescending(gp => gp.Count())
+                                    .Take(5)
+                                    .Select(g => g.Key).ToList();
+
                 List<SearchHistoryDTO> SearchHistoriesDTO = new List<SearchHistoryDTO>();
 
                 foreach (var s in searchHistories)
                 {
-                    var newSearchHistory = new SearchHistoryDTO(s.Id, s.SearchContent, s.SearchDate);
+                    var newSearchHistory = new SearchHistoryDTO(1, s, DateTime.Now);
                     SearchHistoriesDTO.Add(newSearchHistory);
 
                 }

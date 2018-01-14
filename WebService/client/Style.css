@@ -513,6 +513,9 @@ body {
     float: right;
     clear: both;
 }
+#mySearchhistory {
+    width: 100%;
+}
 .linked_posts_title{
     margin:10px;
 }
@@ -958,7 +961,9 @@ svg {
 }
 /*Media Queries Mobile First*/
 @media screen and (min-width: 480px) {
-
+    #mySearchhistory {
+        width: 400px;
+    }
     #annotation_box {
         position: fixed;
         background: white;

@@ -25,9 +25,9 @@
         </thead>
     </table>
 
-    <div class="linked_posts">
+    <div class="linked_posts" id="mySearchhistory">
         <div>
-            <span id="linkposts_button"  data-target="#links"><h2> {{searchHistory.data.length}}</h2> <h2>Search history </h2><span>&#9660;</span></span>
+            <span id="linkposts_button"  data-target="#links"> <h2>Top searches by users </h2><span>&#9660;</span></span>
         </div>
             <div id="links" class="collapse">
             <div  *ngFor="let sh of searchHistory.data">
