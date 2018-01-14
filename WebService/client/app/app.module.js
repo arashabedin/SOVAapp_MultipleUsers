@@ -30,46 +30,46 @@ var index_14 = require("./annotations/index");
 var index_15 = require("./users/index");
 var index_16 = require("./markings/index");
 var index_17 = require("./customization/index");
-var AppModule = (function () {
+var AppModule = /** @class */ (function () {
     function AppModule() {
     }
+    AppModule = __decorate([
+        core_1.NgModule({
+            imports: [
+                platform_browser_1.BrowserModule,
+                forms_1.FormsModule,
+                http_1.HttpModule,
+                app_routing_1.routing
+            ],
+            declarations: [
+                app_component_1.AppComponent,
+                index_1.AlertComponent,
+                index_4.NavMenuComponent,
+                index_5.HomeComponent,
+                index_6.LoginComponent,
+                index_7.RegisterComponent,
+                index_8.QuestionsComponent,
+                index_11.QuestionComponent,
+                index_9.JcloudComponent,
+                index_10.SearchComponent,
+                index_12.CommentsComponent,
+                index_13.AnswersComponent,
+                index_14.AnnotationsComponent,
+                index_15.UsersComponent,
+                index_16.MarkingsComponent,
+                index_17.CustomizationComponent
+            ],
+            providers: [
+                app_config_1.AppConfig,
+                index_2.AuthGuard,
+                index_3.AlertService,
+                index_3.AuthenticationService,
+                index_3.UserService
+            ],
+            bootstrap: [app_component_1.AppComponent]
+        })
+    ], AppModule);
     return AppModule;
 }());
-AppModule = __decorate([
-    core_1.NgModule({
-        imports: [
-            platform_browser_1.BrowserModule,
-            forms_1.FormsModule,
-            http_1.HttpModule,
-            app_routing_1.routing
-        ],
-        declarations: [
-            app_component_1.AppComponent,
-            index_1.AlertComponent,
-            index_4.NavMenuComponent,
-            index_5.HomeComponent,
-            index_6.LoginComponent,
-            index_7.RegisterComponent,
-            index_8.QuestionsComponent,
-            index_11.QuestionComponent,
-            index_9.JcloudComponent,
-            index_10.SearchComponent,
-            index_12.CommentsComponent,
-            index_13.AnswersComponent,
-            index_14.AnnotationsComponent,
-            index_15.UsersComponent,
-            index_16.MarkingsComponent,
-            index_17.CustomizationComponent
-        ],
-        providers: [
-            app_config_1.AppConfig,
-            index_2.AuthGuard,
-            index_3.AlertService,
-            index_3.AuthenticationService,
-            index_3.UserService
-        ],
-        bootstrap: [app_component_1.AppComponent]
-    })
-], AppModule);
 exports.AppModule = AppModule;
 //# sourceMappingURL=app.module.js.map

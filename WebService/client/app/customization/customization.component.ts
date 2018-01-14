@@ -58,9 +58,9 @@ ngOnInit() {
 
     }
 
-    currentpostLimitToedit(currentPostLimit: number) {
+    currentpostLimitToedit(newPostlimit: number) {
     if (!this.startedEditingLimit) {
-        this.newPostlimit = 12;
+        this.newPostlimit = newPostlimit;
         this.startedEditingLimit = true;
     }
 }
