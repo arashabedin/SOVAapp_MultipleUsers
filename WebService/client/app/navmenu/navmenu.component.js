@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var app_config_1 = require("../app.config");
 var router_1 = require("@angular/router");
-var NavMenuComponent = /** @class */ (function () {
+var NavMenuComponent = (function () {
     function NavMenuComponent(config, router) {
         this.config = config;
         this.router = router;
@@ -22,16 +22,16 @@ var NavMenuComponent = /** @class */ (function () {
     NavMenuComponent.prototype.localStorageItem = function (id) {
         return localStorage.getItem(id);
     };
-    NavMenuComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'nav-menu',
-            templateUrl: './navmenu.component.html',
-        }),
-        __metadata("design:paramtypes", [app_config_1.AppConfig,
-            router_1.Router])
-    ], NavMenuComponent);
     return NavMenuComponent;
 }());
+NavMenuComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'nav-menu',
+        templateUrl: './navmenu.component.html',
+    }),
+    __metadata("design:paramtypes", [app_config_1.AppConfig,
+        router_1.Router])
+], NavMenuComponent);
 exports.NavMenuComponent = NavMenuComponent;
 //# sourceMappingURL=navmenu.component.js.map

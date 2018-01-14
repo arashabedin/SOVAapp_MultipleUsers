@@ -24,15 +24,15 @@ namespace WebService.Controllers
 
         }
 
-        [HttpGet(Name = nameof(GetHomeContents))]
-        public IActionResult GetHomeContents()
+        [HttpGet("{Uid}",Name = nameof(GetHomeContents))]
+        public IActionResult GetHomeContents(int Uid)
         {
             HomeModel model = new HomeModel()
             {
 
-                QuestionsUrl = Url.Link(nameof(QuestionController.GetQuestions), new { }),
-                UsersUrl = Url.Link(nameof(UserController.GetUsers), new { }),
-                RecommendedQuestions = _repository.ShowCustomePosts().Select(i => new CustomPostModel
+               // QuestionsUrl = Url.Link(nameof(QuestionController.GetQuestions), new { }),
+              //  UsersUrl = Url.Link(nameof(UserController.GetUsers), new { }),
+                RecommendedQuestions = _repository.ShowCustomePosts(Uid).Select(i => new CustomPostModel
                 {
                     PostId = i.PostId,
                     Title = i.Title,
@@ -45,12 +45,12 @@ namespace WebService.Controllers
 
 
                 }).ToList(),
-                MarkingsUrl = Url.Link(nameof(MarkingController.GetMarkings), new { }),
-                Search = Url.Link(nameof(SearchController.DoSearch), new { SearchText = "Search_Text_Here" }),
-                TermsByPostId = Url.Link(nameof(TermAsResultController.GetTermByPost), new { Pid = 19 }),
-                TermNetwrok = Url.Link(nameof(Co_OccurrenceController.GetCoOccurrencesByWord), new { word = "Term_Here" }),
-                SearchHistoryUrl = Url.Link(nameof(SearchHistoryController.GetSearchHistories), new { }),
-                CustomeFieldUrl = Url.Link(nameof(UserCustomeFieldController.GetUserCustomeField), new { })
+                //MarkingsUrl = Url.Link(nameof(MarkingController.GetMarkings), new { }),
+                //Search = Url.Link(nameof(SearchController.DoSearch), new { SearchText = "Search_Text_Here" }),
+                //TermsByPostId = Url.Link(nameof(TermAsResultController.GetTermByPost), new { Pid = 19 }),
+                //TermNetwrok = Url.Link(nameof(Co_OccurrenceController.GetCoOccurrencesByWord), new { word = "Term_Here" }),
+                //SearchHistoryUrl = Url.Link(nameof(SearchHistoryController.GetSearchHistories), new { }),
+                //CustomeFieldUrl = Url.Link(nameof(UserCustomeFieldController.GetUserCustomeField), new { })
 
             };
 

@@ -14,7 +14,7 @@ var index_1 = require("../_services/index");
 var http_1 = require("@angular/http");
 var router_1 = require("@angular/router");
 var app_config_1 = require("../app.config");
-var HomeComponent = /** @class */ (function () {
+var HomeComponent = (function () {
     function HomeComponent(http, config, userService, route, router) {
         this.http = http;
         this.config = config;
@@ -22,7 +22,7 @@ var HomeComponent = /** @class */ (function () {
         this.route = route;
         this.router = router;
         this.users = [];
-        this.suggestedQurl = '/start';
+        this.suggestedQurl = '/start/';
         this.customizationUrl = '/customization/';
         this.postId = 1;
         this.QNotloaded = true;
@@ -32,7 +32,7 @@ var HomeComponent = /** @class */ (function () {
         var _this = this;
         this.loadAllUsers();
         //new
-        this.http.get(this.config.apiUrl + this.suggestedQurl).subscribe(function (result) {
+        this.http.get(this.config.apiUrl + this.suggestedQurl + this.currentUser.id).subscribe(function (result) {
             _this.suggestedQuestions = result.json().recommendedQuestions;
             _this.QNotloaded = false;
         }, function (error) { return console.error(error); });
@@ -52,14 +52,14 @@ var HomeComponent = /** @class */ (function () {
     HomeComponent.prototype.goToQuestion = function (id) {
         this.router.navigate(['/question', id]);
     };
-    HomeComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            templateUrl: 'home.component.html'
-        }),
-        __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig, index_1.UserService, router_1.ActivatedRoute, router_1.Router])
-    ], HomeComponent);
     return HomeComponent;
 }());
+HomeComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        templateUrl: 'home.component.html'
+    }),
+    __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig, index_1.UserService, router_1.ActivatedRoute, router_1.Router])
+], HomeComponent);
 exports.HomeComponent = HomeComponent;
 //# sourceMappingURL=home.component.js.map

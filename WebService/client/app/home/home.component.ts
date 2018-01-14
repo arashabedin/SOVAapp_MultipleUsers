@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
     public suggestedQuestions: GetsuggestedQuestions;
     public customization: GetCustomization;
 
-    suggestedQurl = '/start';
+    suggestedQurl = '/start/';
     customizationUrl = '/customization/';
     markingStatus: string;
     postId: number = 1;
@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
         this.loadAllUsers();
 
         //new
-        this.http.get(this.config.apiUrl + this.suggestedQurl).subscribe(result => {
+        this.http.get(this.config.apiUrl + this.suggestedQurl + this.currentUser.id).subscribe(result => {
             this.suggestedQuestions = result.json().recommendedQuestions as GetsuggestedQuestions;
             this.QNotloaded = false;
         }, error => console.error(error));

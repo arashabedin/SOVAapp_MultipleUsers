@@ -14,7 +14,7 @@ var http_1 = require("@angular/http");
 var router_1 = require("@angular/router");
 var jcloud_component_1 = require("../jcloud/jcloud.component");
 var app_config_1 = require("../app.config");
-var SearchComponent = /** @class */ (function () {
+var SearchComponent = SearchComponent_1 = (function () {
     function SearchComponent(http, config, route, router) {
         var _this = this;
         this.http = http;
@@ -47,7 +47,6 @@ var SearchComponent = /** @class */ (function () {
             }
         });
     }
-    SearchComponent_1 = SearchComponent;
     SearchComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.http.get(this.config.apiUrl + '/searchhistory').subscribe(function (result) {
@@ -123,20 +122,20 @@ var SearchComponent = /** @class */ (function () {
     SearchComponent.prototype.goToQuestion = function (id) {
         this.router.navigate(['/question', id]);
     };
-    SearchComponent = SearchComponent_1 = __decorate([
-        core_1.NgModule({
-            declarations: [SearchComponent_1, jcloud_component_1.JcloudComponent],
-            bootstrap: [SearchComponent_1]
-        }),
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'search',
-            templateUrl: './search.component.html'
-        }),
-        __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig, router_1.ActivatedRoute, router_1.Router])
-    ], SearchComponent);
     return SearchComponent;
-    var SearchComponent_1;
 }());
+SearchComponent = SearchComponent_1 = __decorate([
+    core_1.NgModule({
+        declarations: [SearchComponent_1, jcloud_component_1.JcloudComponent],
+        bootstrap: [SearchComponent_1]
+    }),
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'search',
+        templateUrl: './search.component.html'
+    }),
+    __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig, router_1.ActivatedRoute, router_1.Router])
+], SearchComponent);
 exports.SearchComponent = SearchComponent;
+var SearchComponent_1;
 //# sourceMappingURL=search.component.js.map

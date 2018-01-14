@@ -1066,11 +1066,11 @@ namespace DataService.DataAccessLayer
         }
 
         //RecommendedPosts
-        public ICollection<CustomePostsDTO> ShowCustomePosts(){
+        public ICollection<CustomePostsDTO> ShowCustomePosts(int Uid){
 
             using (var db = new SovaContext())
             {
-                var result = db.Posts.FromSql("call selectUserCustomePosts()");
+                var result = db.Posts.FromSql("call selectUserCustomePosts({0})", Uid);
                 List<CustomePostsDTO> ResultsDTO = new List<CustomePostsDTO>();
 
                 try{ 

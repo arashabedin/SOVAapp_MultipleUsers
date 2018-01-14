@@ -13,7 +13,7 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var router_1 = require("@angular/router");
 var app_config_1 = require("../app.config");
-var AnswersComponent = /** @class */ (function () {
+var AnswersComponent = (function () {
     function AnswersComponent(http, config, route) {
         this.http = http;
         this.config = config;
@@ -28,19 +28,19 @@ var AnswersComponent = /** @class */ (function () {
     AnswersComponent.prototype.getAnswersData = function () {
         return this.http.get(this.parentdata);
     };
-    __decorate([
-        core_1.Input('parentdata'),
-        __metadata("design:type", String)
-    ], AnswersComponent.prototype, "parentdata", void 0);
-    AnswersComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'answers',
-            templateUrl: './answers.component.html'
-        }),
-        __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig, router_1.ActivatedRoute])
-    ], AnswersComponent);
     return AnswersComponent;
 }());
+__decorate([
+    core_1.Input('parentdata'),
+    __metadata("design:type", String)
+], AnswersComponent.prototype, "parentdata", void 0);
+AnswersComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'answers',
+        templateUrl: './answers.component.html'
+    }),
+    __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig, router_1.ActivatedRoute])
+], AnswersComponent);
 exports.AnswersComponent = AnswersComponent;
 //# sourceMappingURL=answers.component.js.map

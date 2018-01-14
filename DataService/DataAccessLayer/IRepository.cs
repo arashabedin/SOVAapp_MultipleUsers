@@ -113,7 +113,7 @@ namespace DataService.DataAccessLayer
         int CountUserCustomeFields();
 
         //RecommendedPosts
-        ICollection<CustomePostsDTO> ShowCustomePosts();
+        ICollection<CustomePostsDTO> ShowCustomePosts(int Uid);
 
 
         //Co_Occurrent

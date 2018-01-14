@@ -25,19 +25,19 @@ namespace DataService
 
 
             }
-       
 
 
-            //var rep = new RepositoryBody();
 
-            // rep.AddSearchHistory("whats your name");
+            var rep = new RepositoryBody();
 
-            //   Console.WriteLine(rep.RemoveMarking(9033));
-            //Console.WriteLine(rep.Search("best gtk programming ide", 0, 5).Last().Title);
-            //Console.ReadLine();
+            var q = rep.ShowCustomePosts(26);
 
-            //Console.WriteLine();
-            //Console.ReadLine();
+            Console.WriteLine(q.Count);
+            Console.WriteLine(q.First().Title);
+            Console.ReadLine();
+
+            Console.WriteLine();
+            Console.ReadLine();
         }
     }
 }
