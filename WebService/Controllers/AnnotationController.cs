@@ -8,9 +8,11 @@ using DataService.DTO;
 using WebService.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebService.Controllers 
 {
+    [Authorize]
     [Route("api/marking/{Pid}/annotation")]
     public class AnnotationController : CustomeController
     {
@@ -37,6 +39,7 @@ namespace WebService.Controllers
 
 
         }
+        [AllowAnonymous]
         [HttpPost("", Name = nameof(AddAnnotation))]
         public IActionResult AddAnnotation(int Pid ,[FromBody] AnnotationModel obj) {
 
@@ -53,7 +56,7 @@ namespace WebService.Controllers
         
         }
 
-
+        [AllowAnonymous]
         [HttpDelete("{AnnotId}", Name = nameof(RemoveAnnotation))]
         public IActionResult RemoveAnnotation(int AnnotId)
         {
@@ -70,7 +73,7 @@ namespace WebService.Controllers
             }
 
         }
-
+        [AllowAnonymous]
         [HttpPut("{AnnotId}", Name = nameof(EditAnnotation))]
         public IActionResult EditAnnotation(int AnnotId, [FromBody] AnnotationModel myObject )
         {
