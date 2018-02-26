@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { Routes, ActivatedRoute, Router, NavigationEnd} from '@angular/router';
 import { CommentsComponent } from '../comments/comments.component';
 import { AnswersComponent } from '../answers/answers.component';
-import { AnnotationsComponent } from '../Annotations/Annotations.component';
+import { AnnotationsComponent } from '../annotations/annotations.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppConfig } from '../app.config';

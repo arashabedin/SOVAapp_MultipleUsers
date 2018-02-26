@@ -15,12 +15,13 @@ var router_1 = require("@angular/router");
 var app_config_1 = require("../app.config");
 //npm install --save jquery
 //npm install - D @types/jquery
-var CommentsComponent = CommentsComponent_1 = (function () {
+var CommentsComponent = /** @class */ (function () {
     function CommentsComponent(http, config, route) {
         this.http = http;
         this.config = config;
         this.route = route;
     }
+    CommentsComponent_1 = CommentsComponent;
     CommentsComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.getCommentsData().subscribe(function (result) {
@@ -30,24 +31,24 @@ var CommentsComponent = CommentsComponent_1 = (function () {
     CommentsComponent.prototype.getCommentsData = function () {
         return this.http.get(this.parentdata);
     };
+    __decorate([
+        core_1.Input('parentdata'),
+        __metadata("design:type", String)
+    ], CommentsComponent.prototype, "parentdata", void 0);
+    CommentsComponent = CommentsComponent_1 = __decorate([
+        core_1.NgModule({
+            declarations: [CommentsComponent_1],
+            bootstrap: [CommentsComponent_1]
+        }),
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'comments',
+            templateUrl: './comments.component.html'
+        }),
+        __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig, router_1.ActivatedRoute])
+    ], CommentsComponent);
     return CommentsComponent;
+    var CommentsComponent_1;
 }());
-__decorate([
-    core_1.Input('parentdata'),
-    __metadata("design:type", String)
-], CommentsComponent.prototype, "parentdata", void 0);
-CommentsComponent = CommentsComponent_1 = __decorate([
-    core_1.NgModule({
-        declarations: [CommentsComponent_1],
-        bootstrap: [CommentsComponent_1]
-    }),
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'comments',
-        templateUrl: './comments.component.html'
-    }),
-    __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig, router_1.ActivatedRoute])
-], CommentsComponent);
 exports.CommentsComponent = CommentsComponent;
-var CommentsComponent_1;
 //# sourceMappingURL=comments.component.js.map

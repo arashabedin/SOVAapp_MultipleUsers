@@ -13006,40 +13006,35 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Arash\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "/root/.nuget/packages/": {},
+    "/opt/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Arash\\Documents\\GitHub\\SOVAapp_MultipleUsers\\WebService\\WebService.csproj",
+      "projectUniqueName": "/home/maxime/Documents/SOVAapp_MultipleUsers/WebService/WebService.csproj",
       "projectName": "WebService",
-      "projectPath": "C:\\Users\\Arash\\Documents\\GitHub\\SOVAapp_MultipleUsers\\WebService\\WebService.csproj",
-      "packagesPath": "C:\\Users\\Arash\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Arash\\Documents\\GitHub\\SOVAapp_MultipleUsers\\WebService\\obj\\",
+      "projectPath": "/home/maxime/Documents/SOVAapp_MultipleUsers/WebService/WebService.csproj",
+      "packagesPath": "/root/.nuget/packages/",
+      "outputPath": "/home/maxime/Documents/SOVAapp_MultipleUsers/WebService/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "/opt/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Arash\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/root/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\Arash\\Documents\\GitHub\\SOVAapp_MultipleUsers\\DataService\\DataService.csproj": {
-              "projectPath": "C:\\Users\\Arash\\Documents\\GitHub\\SOVAapp_MultipleUsers\\DataService\\DataService.csproj"
+            "/home/maxime/Documents/SOVAapp_MultipleUsers/DataService/DataService.csproj": {
+              "projectPath": "/home/maxime/Documents/SOVAapp_MultipleUsers/DataService/DataService.csproj"
             }
           }
         }
@@ -13053,10 +13048,6 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "AutoMapper.Extensions.Microsoft.DependencyInjection": {
-            "target": "Package",
-            "version": "3.2.0"
-          },
           "Microsoft.NETCore.App": {
             "target": "Package",
             "version": "2.0.0",
@@ -13065,6 +13056,10 @@
           "AutoMapper": {
             "target": "Package",
             "version": "6.2.2"
+          },
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+            "target": "Package",
+            "version": "3.2.0"
           },
           "Microsoft.AspNetCore.All": {
             "target": "Package",
