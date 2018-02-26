@@ -195,7 +195,7 @@ body {
 
 @font-face {
     font-family: logofont;
-    src: url(../../fonts/logofont.ttf);
+    src: url("./fonts/logofont.ttf");
 }
 .navbar-form {
     box-shadow: none;
@@ -320,7 +320,7 @@ body {
     background-color: white;
 }
     .question_container:hover {
-        background-image: url("../img/pageflip.jpg");
+        background-image: url("./img/pageflip.jpg");
         background-size: 65px;
         background-repeat: no-repeat;
         background-position: 161px 217px;
@@ -367,7 +367,7 @@ body {
     margin-bottom: 20px;
 }
 .user_icon {
-    background-image: url(../img/user.png);
+    background-image: url("./img/user.png");
     width: 21px;
     height: 26px;
     display: inline-block;
@@ -379,7 +379,7 @@ body {
     font-size: 21px;
 }
 .time_icon {
-    background-image: url(../img/calendar.png);
+    background-image: url("./img/calendar.png");
     width: 28px;
     height: 28px;
     display: inline-block;
@@ -405,7 +405,7 @@ body {
     display: inline-block;
 }
 .tags_icon {
-    background-image: url(../img/tags.png);
+    background-image: url("./img/tags.png");
     width: 21px;
     height: 26px;
     display: inline-block;
@@ -672,7 +672,7 @@ svg {
 
 }
 .marking_container:hover {
-    background-image: url("../img/pageflip.jpg");
+    background-image: url("./img/pageflip.jpg");
     background-size: 65px;
     background-repeat: no-repeat;
     background-position: 161px 67px;
@@ -940,7 +940,7 @@ svg {
     display: block;
 }
 .location_icon {
-    background-image: url(../img/location.png);
+    background-image: url(./img/location.png);
     background-repeat: no-repeat;
     width: 24px;
     height: 25px;
@@ -984,7 +984,7 @@ svg {
         margin-top: -50px;
         top: -16px;
         left: 327px;
-        background-image: url(../img/triangle.png);
+        background-image: url(./img/triangle.png);
         background-repeat: no-repeat;
         background-size: 100%;
     }

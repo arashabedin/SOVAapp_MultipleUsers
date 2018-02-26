@@ -13840,43 +13840,38 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Arash\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "/root/.nuget/packages/": {},
+    "/opt/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Arash\\Documents\\GitHub\\SOVAapp_MultipleUsers\\UnitTests\\UnitTests.csproj",
+      "projectUniqueName": "/home/maxime/t/SOVAapp_MultipleUsers/UnitTests/UnitTests.csproj",
       "projectName": "UnitTests",
-      "projectPath": "C:\\Users\\Arash\\Documents\\GitHub\\SOVAapp_MultipleUsers\\UnitTests\\UnitTests.csproj",
-      "packagesPath": "C:\\Users\\Arash\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Arash\\Documents\\GitHub\\SOVAapp_MultipleUsers\\UnitTests\\obj\\",
+      "projectPath": "/home/maxime/t/SOVAapp_MultipleUsers/UnitTests/UnitTests.csproj",
+      "packagesPath": "/root/.nuget/packages/",
+      "outputPath": "/home/maxime/t/SOVAapp_MultipleUsers/UnitTests/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "/opt/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Arash\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/root/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\Arash\\Documents\\GitHub\\SOVAapp_MultipleUsers\\WebService\\WebService.csproj": {
-              "projectPath": "C:\\Users\\Arash\\Documents\\GitHub\\SOVAapp_MultipleUsers\\WebService\\WebService.csproj"
+            "/home/maxime/t/SOVAapp_MultipleUsers/DataService/DataService.csproj": {
+              "projectPath": "/home/maxime/t/SOVAapp_MultipleUsers/DataService/DataService.csproj"
             },
-            "C:\\Users\\Arash\\Documents\\GitHub\\SOVAapp_MultipleUsers\\DataService\\DataService.csproj": {
-              "projectPath": "C:\\Users\\Arash\\Documents\\GitHub\\SOVAapp_MultipleUsers\\DataService\\DataService.csproj"
+            "/home/maxime/t/SOVAapp_MultipleUsers/WebService/WebService.csproj": {
+              "projectPath": "/home/maxime/t/SOVAapp_MultipleUsers/WebService/WebService.csproj"
             }
           }
         }
@@ -13890,26 +13885,27 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "xunit.runner.visualstudio": {
+          "Microsoft.NETCore.App": {
+            "suppressParent": "All",
             "target": "Package",
-            "version": "2.2.0"
+            "version": "2.0.0",
+            "autoReferenced": true
+          },
+          "Microsoft.NET.Test.Sdk": {
+            "target": "Package",
+            "version": "15.3.0-preview-20170628-02"
           },
           "Moq": {
             "target": "Package",
             "version": "4.7.145"
           },
-          "Microsoft.NETCore.App": {
-            "target": "Package",
-            "version": "2.0.0",
-            "autoReferenced": true
-          },
           "xunit": {
             "target": "Package",
             "version": "2.2.0"
           },
-          "Microsoft.NET.Test.Sdk": {
+          "xunit.runner.visualstudio": {
             "target": "Package",
-            "version": "15.3.0-preview-20170628-02"
+            "version": "2.2.0"
           }
         },
         "imports": [

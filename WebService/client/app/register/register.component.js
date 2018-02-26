@@ -14,7 +14,7 @@ var router_1 = require("@angular/router");
 var http_1 = require("@angular/http");
 var index_1 = require("../_services/index");
 var app_config_1 = require("../app.config");
-var RegisterComponent = (function () {
+var RegisterComponent = /** @class */ (function () {
     function RegisterComponent(router, http, config, userService, alertService) {
         this.router = router;
         this.http = http;
@@ -53,18 +53,18 @@ var RegisterComponent = (function () {
             _this.loading = false;
         });
     };
+    RegisterComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            templateUrl: 'register.component.html'
+        }),
+        __metadata("design:paramtypes", [router_1.Router,
+            http_1.Http,
+            app_config_1.AppConfig,
+            index_1.UserService,
+            index_1.AlertService])
+    ], RegisterComponent);
     return RegisterComponent;
 }());
-RegisterComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        templateUrl: 'register.component.html'
-    }),
-    __metadata("design:paramtypes", [router_1.Router,
-        http_1.Http,
-        app_config_1.AppConfig,
-        index_1.UserService,
-        index_1.AlertService])
-], RegisterComponent);
 exports.RegisterComponent = RegisterComponent;
 //# sourceMappingURL=register.component.js.map
