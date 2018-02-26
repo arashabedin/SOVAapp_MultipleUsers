@@ -6740,11 +6740,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/maxime/Documents/SOVAapp_MultipleUsers/DataService/DataService.csproj",
+      "projectUniqueName": "/home/maxime/t/SOVAapp_MultipleUsers/DataService/DataService.csproj",
       "projectName": "DataService",
-      "projectPath": "/home/maxime/Documents/SOVAapp_MultipleUsers/DataService/DataService.csproj",
+      "projectPath": "/home/maxime/t/SOVAapp_MultipleUsers/DataService/DataService.csproj",
       "packagesPath": "/root/.nuget/packages/",
-      "outputPath": "/home/maxime/Documents/SOVAapp_MultipleUsers/DataService/obj/",
+      "outputPath": "/home/maxime/t/SOVAapp_MultipleUsers/DataService/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/opt/dotnet/sdk/NuGetFallbackFolder"

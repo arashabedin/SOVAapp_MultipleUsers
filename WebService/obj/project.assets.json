@@ -13012,11 +13012,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/maxime/Documents/SOVAapp_MultipleUsers/WebService/WebService.csproj",
+      "projectUniqueName": "/home/maxime/t/SOVAapp_MultipleUsers/WebService/WebService.csproj",
       "projectName": "WebService",
-      "projectPath": "/home/maxime/Documents/SOVAapp_MultipleUsers/WebService/WebService.csproj",
+      "projectPath": "/home/maxime/t/SOVAapp_MultipleUsers/WebService/WebService.csproj",
       "packagesPath": "/root/.nuget/packages/",
-      "outputPath": "/home/maxime/Documents/SOVAapp_MultipleUsers/WebService/obj/",
+      "outputPath": "/home/maxime/t/SOVAapp_MultipleUsers/WebService/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/opt/dotnet/sdk/NuGetFallbackFolder"
@@ -13033,8 +13033,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "/home/maxime/Documents/SOVAapp_MultipleUsers/DataService/DataService.csproj": {
-              "projectPath": "/home/maxime/Documents/SOVAapp_MultipleUsers/DataService/DataService.csproj"
+            "/home/maxime/t/SOVAapp_MultipleUsers/DataService/DataService.csproj": {
+              "projectPath": "/home/maxime/t/SOVAapp_MultipleUsers/DataService/DataService.csproj"
             }
           }
         }
